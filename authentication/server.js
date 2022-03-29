@@ -1,16 +1,32 @@
+// =======================================
+//              DEPENDENCIES
+// =======================================
+require('dotenv').config()
+const log = require("debug")("paper-trading:server")
+console.log(process.env.PORT)
 const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const user = require("./models/users");
 
 const app = express();
-const PORT = 4000;
+const PORT = process.env.PORT ?? 4000;
 // const users = [];
+const mongoURI = process.env.MONGO_URI;
+// const db = mongoose.connection;
+mongoose.connect(mongoURI, {}, () => {
+    console.log("Connected~")
+})
+
+app.use(express.urlencoded({extended:false}));
 
 app.get("/", (req, res) => {
   res.send("Hello");
 });
 
+// =======================================
+//              ROUTES
+// =======================================
 //New route
 app.get("/register/new", (req, res) => {
   res.render("register.ejs");
@@ -20,15 +36,15 @@ app.get("/register/new", (req, res) => {
 //Create route
 app.post("/register", (req,res) => {
     const save = async () => {
-        await users.create(req.body)
+        await user.create(req.body)
     }
     save();
-
-    const users = new users(req.body)
-    users.save();
-    res.redirect("/")
-
-    // res.send(req.body);
+console.log(req.body)
+// console.log(req)
+    // const newUser = new user(req.body)
+    // newUser.save();
+    // res.redirect("/")
+    res.send(req.body);
 })
 
 // app.post("/", (req, res) => {

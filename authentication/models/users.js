@@ -2,15 +2,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    username: {type: String, required: true},
-    email: {type: String, required: true},
-    password: {type: String, required: true},
-    cfmPassword : {type: String, required: true},
-    dob: {type: Date, required: true},
-    gender: {type: Boolean, required: true},
-    risk: {type: Boolean, required: true},
-    amount: {type: String, required: true},
-    newToTrading: {type: Boolean, required: true},
+    username: {type: String, required: false},
+    email: {type: String, required: false},
+    password: {type: String, required: false},
+    cfmPassword : {type: String, required: false},
+    dob: {type: Date, default: Date.now, required: false},
+    gender: {type: String, required: false},
+    risk: {type: String, required: false},
+    amount: {type: String, required: false},
+    newToTrading: {type: String, required: false },
 });
 
 const user = mongoose.model("user", userSchema);
