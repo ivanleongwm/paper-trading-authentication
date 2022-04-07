@@ -5,6 +5,7 @@ require('dotenv').config()
 const log = require("debug")("paper-trading:server")
 console.log(process.env.PORT)
 const express = require("express");
+const cors = require("cors");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const UserController = require("./controllers/userController")
@@ -12,14 +13,16 @@ const UserController = require("./controllers/userController")
 
 const app = express();
 const PORT = process.env.PORT ?? 4000;
-// const users = [];
 const mongoURI = process.env.MONGO_URI;
 // const db = mongoose.connection;
 mongoose.connect(mongoURI, {}, () => {
     console.log("Connected~")
 })
 
-app.use(express.urlencoded({extended:false}));
+app.use(cors());
+app.use("/api/users",UserController)
+
+//app.use(express.urlencoded({extended:false}));
 
 app.get("/", (req, res) => {
   res.send("Hello");

@@ -2,34 +2,50 @@
 //              DEPENDENCIES
 // =======================================
 const express = require("express");
-const user = require("./models/users");
+const User = require("./models/Users");
 const router = express.Router();
 
 router.get("/", (req, res) => {
   res.send("Hello");
 });
 
+router.get("/seed", async (req, res) => {
+    const userDetails = [
+        {
+            username: "Joy Kwok",
+            email:"hi123@gmail.com",
+            password:"12345"
+        }
+    ]
+    await User.deleteMany({})
+    await User.insertMany(userDetails)
+    res.json(userDetails)
+})
+
 // =======================================
 //              ROUTES
 // =======================================
-//New route
-router.get("/register/new", (req, res) => {
-  res.render("register.ejs");
+//Index route
+router.get("/", (req, res) => {
+    User.find()
+        .then(userDetails => {
+            res.json(userDetails)
+        })
+        .catch(err => {
+            res.json(err)
+        })
 });
 
 
 //Create route
-router.post("/register", (req,res) => {
-    const save = async () => {
-        await user.create(req.body)
-    }
-    save();
-console.log(req.body)
-// console.log(req)
-    // const newUser = new user(req.body)
-    // newUser.save();
-    // res.redirect("/")
-    res.send(req.body);
-})
+router.post("/", async (req,res) => {
+    console.log("body",req.body)
+    try {
+        const createdUser = await User.create(req.body);
+        res.status(200).send(createdUser);
+    } catch (error) {
+        res.status(400).json({error: error.message});
+    };
+});
 
 module.exports = router;
