@@ -12,7 +12,7 @@ const UserController = require("./controllers/userController")
 
 
 const app = express();
-const PORT = process.env.PORT ?? 4000;
+const PORT = process.env.PORT ?? 8686;
 const mongoURI = process.env.MONGO_URI;
 // const db = mongoose.connection;
 mongoose.connect(mongoURI, {}, () => {

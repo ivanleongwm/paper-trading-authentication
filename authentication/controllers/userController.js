@@ -2,12 +2,8 @@
 //              DEPENDENCIES
 // =======================================
 const express = require("express");
-const User = require("./models/Users");
+const User = require("../models/Users");
 const router = express.Router();
-
-router.get("/", (req, res) => {
-  res.send("Hello");
-});
 
 router.get("/seed", async (req, res) => {
     const userDetails = [
