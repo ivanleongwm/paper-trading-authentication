@@ -3,7 +3,7 @@
 // =======================================
 require('dotenv').config()
 const log = require("debug")("paper-trading:server")
-console.log(process.env.PORT)
+// console.log(process.env.PORT)
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
