@@ -2,6 +2,8 @@
 //              DEPENDENCIES
 // =======================================
 const express = require("express");
+const session = require("express-session");
+const bcrypt = require("bcrypt");
 const User = require("../models/Users");
 const router = express.Router();
 
@@ -54,5 +56,7 @@ router.post("/", async (req,res) => {
         res.status(400).json({error: error.message});
     };
 });
+
+
 
 module.exports = router;
