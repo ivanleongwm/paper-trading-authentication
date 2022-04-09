@@ -45,7 +45,7 @@ router.get("/", (req, res) => {
 
 
 
-//Create route
+//Create route for register
 router.post("/register", async (req,res) => {
     console.log("body",req.body)
     try {console.log(req.body)
@@ -56,6 +56,17 @@ router.post("/register", async (req,res) => {
     };
 });
 
+
+//Create route for login
+router.post("/login", async (req,res) => {
+    console.log("body",req.body)
+    try {
+        const findUserName = await User.find({username: "sally"});
+        console.log(findUserName)
+    } catch (error) {
+        console.log(error)
+    }
+});
 
 
 module.exports = router;
