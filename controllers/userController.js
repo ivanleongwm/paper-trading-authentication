@@ -61,7 +61,7 @@ router.post("/register", async (req,res) => {
 router.post("/login", async (req,res) => {
     console.log("body",req.body)
     try {
-        const findUserName = await User.find(req.body.username);
+        const findUserName = await User.find({username: req.body.username});
         console.log(findUserName)
     } catch (error) {
         console.log(error)
