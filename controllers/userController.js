@@ -43,10 +43,11 @@ router.get("/", (req, res) => {
 });
 
 
+
 //Create route
 router.post("/", async (req,res) => {
     console.log("body",req.body)
-    try {
+    try {console.log(req.body)
         const createdUser = await User.create(req.body);
         res.status(200).send(createdUser);
     } catch (error) {
