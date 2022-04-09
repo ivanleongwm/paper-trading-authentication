@@ -3,7 +3,6 @@
 // =======================================
 const express = require("express");
 const session = require("express-session");
-const bcrypt = require("bcrypt");
 const User = require("../models/Users");
 const router = express.Router();
 
