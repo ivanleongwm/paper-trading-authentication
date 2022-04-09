@@ -11,6 +11,11 @@ router.get("/seed", async (req, res) => {
             username: "Joy Kwok",
             email:"hi123@gmail.com",
             password:"12345"
+        },
+        {
+            username: "Ivan Leong",
+            email:"hi345@gmail.com",
+            password:"12345"
         }
     ]
     await User.deleteMany({})
