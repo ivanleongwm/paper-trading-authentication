@@ -46,7 +46,7 @@ router.get("/", (req, res) => {
 
 
 //Create route
-router.post("/register", async (req,res) => {
+router.post("/", async (req,res) => {
     console.log("body",req.body)
     try {console.log(req.body)
         const createdUser = await User.create(req.body);
