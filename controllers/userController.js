@@ -71,7 +71,7 @@ router.post("/login", async (req,res) => {
         if (findUserName) {
             // check user password with hashed password stored in the database
             //const validPassword = await bcrypt.compare(req.body.password, findUserName.password);
-            const validPassword = await bcrypt.compare("TEST", "TEST");
+            const validPassword = await bcrypt.compare("TEST", bcrypt.hashSync("TEST",bcrypt.genSaltSync(10)));
             
             if (validPassword) {
               req.session.currentUser = findUserName
