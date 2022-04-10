@@ -3,6 +3,8 @@
 // =======================================
 const express = require("express");
 const session = require("express-session");
+const { find } = require("../models/Users");
+const bcrypt = require("bcrypt");
 const User = require("../models/Users");
 const router = express.Router();
 
@@ -62,7 +64,21 @@ router.post("/login", async (req,res) => {
     console.log("body",req.body)
     try {
         const findUserName = await User.find({username: req.body.username});
+        if (user) {
+            // check user password with hashed password stored in the database
+            const validPassword = await bcrypt.compare(req.body.password, findUserName.password);
+            if (validPassword) {
+              req.session.currentUser = findUserName
+              res.status(200).json({ message: "Valid password" });
+            } else {
+              res.status(400).json({ error: "Invalid Password" });
+            }
+          } else {
+            res.status(401).json({ error: "User does not exist" });
+          }
+
         console.log(findUserName)
+        console.log(validPassword)
     } catch (error) {
         console.log(error)
     }
