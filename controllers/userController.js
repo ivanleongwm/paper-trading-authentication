@@ -3,7 +3,7 @@
 // =======================================
 const express = require("express");
 const session = require("express-session");
-const { find } = require("../models/Users");
+const { find, create } = require("../models/Users");
 const bcrypt = require("bcrypt");
 const User = require("../models/Users");
 const router = express.Router();
@@ -49,12 +49,14 @@ router.get("/", (req, res) => {
 
 //Create route for register
 router.post("/register", async (req,res) => {
-    console.log("body",req.body)
-    try {console.log(req.body)
+    const body = req.body
+    console.log("body", body)
+    try {
+        console.log(body)
         const createdUser = await User.create(req.body);
         const salt = await bcrypt.genSalt(10);
-        user.password = await bcrypt.hash(user.password, salt)
-        res.status(200).send(createdUser);
+        createdUser.password = await bcrypt.hash(createdUser.password, salt)
+        createdUser.save().then(()=> res.status(200).send('Success'));
     } catch (error) {
         res.status(400).json({error: error.message});
     };
