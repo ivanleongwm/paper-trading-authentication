@@ -84,7 +84,6 @@ router.post("/login", async (req,res) => {
           }
 
         console.log(findUserName)
-        console.log(validPassword)
     } catch (error) {
         console.log(error)
     }
