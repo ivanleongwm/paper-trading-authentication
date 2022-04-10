@@ -9,6 +9,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const UserController = require("./controllers/userController")
+const methodOverride = require("method-override");
 const session = require("express-session");
 
 
@@ -20,12 +21,8 @@ mongoose.connect(mongoURI, {}, () => {
     console.log("Connected~")
 })
 
-app.use(cors());
-app.use(express.json());
-app.use("/api/users",UserController)
-
-app.use(express.urlencoded({extended:false}));
-
+//Middleware
+app.use(morgan("tiny"))
 app.use(
   session({
     secret: process.env.SECRET, //a random string do not copy this value or your stuff will get hacked
@@ -33,6 +30,13 @@ app.use(
     saveUninitialized: false, // default  more info: https://www.npmjs.com/package/express-session#resave
   })
 );
+
+app.use(express.urlencoded({extended:false}));
+app.use(methodOverride("_method"));
+app.use(cors());
+app.use(express.json());
+app.use("/api/users", UserController);
+
 
 app.get("/", (req, res) => {
   res.send("Hello");
