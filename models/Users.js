@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const accountSchema = new Schema({
+const userSchema = new Schema({
     name: {type: String, required: false},
     username: {type: String, required: false},
     email: {type: String, required: false},
@@ -14,6 +14,6 @@ const accountSchema = new Schema({
     // newToTrading: {type: String, required: false },
 });
 
-const accountDetails = mongoose.model("account-details", accountSchema);
+const User = mongoose.model("User", userSchema);
 
-module.exports = accountDetails;
+module.exports = User;
