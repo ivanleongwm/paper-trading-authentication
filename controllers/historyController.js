@@ -12,7 +12,7 @@ router.get("/seed", async (req, res) => {
   //   // { date: "2021-02-28", ticker: "GOOGL", quantity: 25, salesPrice: 100 },
   // ];
   await StocksHistory.deleteMany({});
-  StockDetails.map((stockDetail) => {await StocksHistory.insert(stockDetail)} )
+  await StocksHistory.insertMany(StockDetails);
   // await StocksHistory.insertMany(stocksHistory);
   res.json(StockDetails);
 });
