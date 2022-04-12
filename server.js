@@ -9,8 +9,6 @@ const cors = require("cors");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const UserController = require("./controllers/userController")
-const PurchaseController = require ("./controllers/purchaseController")
-const SalesController = require ("./controllers/salesController")
 const methodOverride = require("method-override");
 const session = require("express-session");
 
@@ -38,8 +36,6 @@ app.use(methodOverride("_method"));
 app.use(cors());
 app.use(express.json());
 app.use("/api/users", UserController);
-app.use("/api/purchase", PurchaseController);
-app.use("/api/sales", SalesController);
 
 
 app.get("/", (req, res) => {
