@@ -2,7 +2,7 @@
 //              DEPENDENCIES
 // =======================================
 const express = require("express");
-const { find, create } = require("../models/PurchaseLog");
+// const { find, create } = require("../models/PurchaseLog");
 const PurchaseLog = require("../models/PurchaseLog");
 const router = express.Router();
 
