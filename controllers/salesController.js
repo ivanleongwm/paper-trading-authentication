@@ -2,8 +2,8 @@
 //              DEPENDENCIES
 // =======================================
 const express = require("express");
-const { find, create } = require("../models/purchaseLog");
-const SalesLog = require("../models/salesLog");
+const { find, create } = require("../models/PurchaseLog");
+const SalesLog = require("../models/SalesLog");
 const router = express.Router();
 
 router.get("/seed", async (req, res) => {
