@@ -2,9 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const historySchema = new Schema({
-    ticker: {type: String, required: false},
-    date: {type: Date, required: false},
-    price: {type: Number, required: false},
+    symbol: {type: String, required: false},
+    historical : [{
+        date : Date,
+        close : Number
+         }]
 });
 
 const stocksHistory = mongoose.model("stocks-history", historySchema);
@@ -12,3 +14,4 @@ const stocksHistory = mongoose.model("stocks-history", historySchema);
 module.exports = stocksHistory;
 
 // [{date: '2021-12-20', price: 22}, {date: '2021-12-20', price: 22}]
+// ownedBy: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
