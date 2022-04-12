@@ -21,7 +21,7 @@ router.get("/seed", async (req, res) => {
 // =======================================
 //Index route
 router.get("/", (req, res) => {
-  User.find()
+  SalesLog.find()
     .then((salesDetails) => {
       res.json(salesDetails);
     })

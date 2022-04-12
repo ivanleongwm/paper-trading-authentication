@@ -2,7 +2,7 @@
 //              DEPENDENCIES
 // =======================================
 const express = require("express");
-// const { find, create } = require("../models/PurchaseLog");
+const { find, create } = require("../models/PurchaseLog");
 const PurchaseLog = require("../models/PurchaseLog");
 const router = express.Router();
 
@@ -21,7 +21,7 @@ router.get("/seed", async (req, res) => {
 // =======================================
 //Index route
 router.get("/", (req, res) => {
-  User.find()
+  PurchaseLog.find()
     .then((purchaseDetails) => {
       res.json(purchaseDetails);
     })
