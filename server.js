@@ -11,6 +11,7 @@ const mongoose = require("mongoose");
 const UserController = require("./controllers/userController")
 const PurchaseController = require ("./controllers/purchaseController")
 const SalesController = require ("./controllers/salesController")
+const StocksHistory = require("./controllers/historyController")
 const methodOverride = require("method-override");
 const session = require("express-session");
 
@@ -40,6 +41,7 @@ app.use(express.json());
 app.use("/api/users", UserController);
 app.use("/api/purchase", PurchaseController);
 app.use("/api/sales", SalesController);
+app.use("/api/history", StocksHistory);
 
 
 app.get("/", (req, res) => {

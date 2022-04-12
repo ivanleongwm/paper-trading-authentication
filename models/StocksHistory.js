@@ -5,7 +5,7 @@ const historySchema = new Schema({
     symbol: {type: String, required: false},
     historical : [{
         date : Date,
-        close : Number
+        close : Number,
          }]
 });
 
