@@ -14,6 +14,6 @@ const userSchema = new Schema({
     // newToTrading: {type: String, required: false },
 });
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model("account-details", userSchema);
 
 module.exports = User;
