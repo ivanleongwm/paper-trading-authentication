@@ -47,6 +47,28 @@ router.get("/", (req, res) => {
 
 
 
+// //* login route
+// router.post("/login", async (req, res) => {
+//     const { username, password} = req.body;
+//     // const hashPassword = bcrypt.hashSync(password, saltRounds);
+//     const user = await User.findOne({ username });
+
+//     if (!user) {
+//         res.send("User not found");
+//     } else if (bcrypt.compareSync(password, user.password)) {
+//       req.session.user = user;
+//       req.session.count = 1;
+//       res.send("Ok");
+//     } else {
+//       res.send("No")
+//     }
+
+//   // res.send(user);
+//   //* success or failure
+// });
+
+
+const saltRounds = 10;
 //Create route for register
 router.post("/register", async (req,res) => {
     const body = req.body
@@ -54,8 +76,8 @@ router.post("/register", async (req,res) => {
     try {
         console.log(body)
         const createdUser = await User.create(req.body);
-        const salt = await bcrypt.genSalt(10);
-        createdUser.password = await bcrypt.hash(createdUser.password, salt)
+        // const salt = await bcrypt.genSalt(10);
+        createdUser.password = await bcrypt.hash(createdUser.password, saltRounds)
         createdUser.save().then(()=> res.status(200).send('Success'));
     } catch (error) {
         res.status(400).json({error: error.message});
@@ -63,15 +85,17 @@ router.post("/register", async (req,res) => {
 });
 
 
+
 //Create route for login
 router.post("/login", async (req,res) => {
     console.log("body",req.body)
     try {
-        const findUserName = await User.find({"username": "Simon"});//req.body.username
+        const findUserName = await User.findOne({"username": "Simon"});//req.body.username
         console.log("findUsername", findUserName);
         if (findUserName) {
+            const hashPassword = bcrypt.hashSync(req.body.password, saltRounds)
             // check user password with hashed password stored in the database
-            const validPassword = await bcrypt.compare(req.body.password, findUserName[0].password);
+            const validPassword = await bcrypt.compare(hashPassword, findUserName.password);
             // const validPassword = await bcrypt.compare("TEST", bcrypt.hashSync("TEST",bcrypt.genSaltSync(10)));
             
             if (validPassword) {
@@ -90,5 +114,32 @@ router.post("/login", async (req,res) => {
     }
 });
 
+// router.get("/logout", (req, res) => {
+//   req.session.destroy();
+//   res.send("logout")
+// })
+
 
 module.exports = router;
+
+
+
+
+
+
+// router.get("/secret", (req, res) => {
+//     const user = req.session.user;
+
+//     if (user) {
+    
+//       res.send(user)
+//     } else {
+//       res.send("no entry")
+//     }
+// })
+
+// router.get("/secret2", (req, res) => {
+//   const count = req.session.count;
+//   req.session.count = req.session.count + 1;
+//   res.send("count" + count)
+// })
