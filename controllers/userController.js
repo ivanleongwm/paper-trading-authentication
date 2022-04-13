@@ -77,7 +77,7 @@ router.post("/register", async (req,res) => {
         console.log(body)
         const createdUser = await User.create(req.body);
         // const salt = await bcrypt.genSalt(10);
-        createdUser.password = await bcrypt.hashSync(createdUser.password, saltRounds)
+        createdUser.password = await bcrypt.hash(createdUser.password, saltRounds)
         createdUser.save().then(()=> res.status(200).send('Success'));
     } catch (error) {
         res.status(400).json({error: error.message});
@@ -93,7 +93,7 @@ router.post("/login", async (req,res) => {
         const findUserName = await User.findOne({"username": req.body.username});//req.body.username
         console.log("findUsername", findUserName);
         if (findUserName) {
-            const hashPassword = bcrypt.hashSync(req.body.password, saltRounds)
+            const hashPassword = bcrypt.hash(req.body.password, saltRounds)
             // check user password with hashed password stored in the database
             const validPassword = await bcrypt.compare(hashPassword, findUserName.password);
             console.log("valid password", validPassword)
