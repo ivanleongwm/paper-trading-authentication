@@ -13,17 +13,17 @@ router.get("/seed", async (req, res) => {
         {
             username: "Joy Kwok",
             email:"hi123@gmail.com",
-            password:"12345"
+            password: bcrypt.hashSync("88888", saltRounds),
         },
         {
             username: "Ivan Leong",
             email:"hi345@gmail.com",
-            password:"12345"
+            password: bcrypt.hashSync("88888", saltRounds),
         },
         {
             username: "Simon",
             email:"hi456@gmail.com",
-            password:"123"
+            password: bcrypt.hashSync("88888", saltRounds),
         }
     ]
     await User.deleteMany({})
@@ -102,7 +102,7 @@ router.post("/login", async (req,res) => {
             if (validPassword) {
               req.session.currentUser = findUserName
               req.session.count = 1;
-              res.redirect("../portfolio")
+            //   res.redirect("../portfolio")
               res.status(200).json({ message: "Valid password" });
             } else {
               res.status(400).json({ error: "Invalid Password" });
