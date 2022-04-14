@@ -8,6 +8,27 @@ const bcrypt = require("bcrypt");
 const User = require("../models/Users");
 const router = express.Router();
 
+
+// const saltRounds = 10;
+// router.get("/seed", async (req, res) => {
+//     try {
+//         await User.deleteMany({})
+//         await User.create([
+//           {
+//             username: "simon",
+//             password: bcrypt.hashSync("12345", saltRounds),
+//           },
+//           {
+//             username: "admin",
+//             password: bcrypt.hashSync("88888", saltRounds),
+//           },
+//         ]);
+//         res.send("Seed")
+//       } catch (error) {
+//           console.log(error);
+//       }
+// })
+
 router.get("/seed", async (req, res) => {
     const userDetails = [
         {
@@ -102,7 +123,7 @@ router.post("/login", async (req,res) => {
             if (validPassword) {
               req.session.currentUser = findUserName
               req.session.count = 1;
-            //   res.redirect("../portfolio")
+              res.redirect("../")
               res.status(200).json({ message: "Valid password" });
             } else {
               res.status(400).json({ error: "Invalid Password" });
