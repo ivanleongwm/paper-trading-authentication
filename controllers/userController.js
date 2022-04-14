@@ -123,6 +123,7 @@ router.post("/login", async (req,res) => {
             if (validPassword) {
               req.session.currentUser = findUserName
               req.session.count = 1;
+              console.log(req.session)
             //   res.redirect("/")
               res.status(200).json({ message: "Valid password" });
             } else {
