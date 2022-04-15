@@ -29,6 +29,19 @@ const router = express.Router();
 //       }
 // })
 
+const isAuthenticated = (req, res, next) => {
+    if (req.session.isAuthenticated) {
+       next();
+    } else {
+      res.status(200).send("Sorry you have no access.")
+    }
+  };
+
+//? secret
+router.get("/loginsuccessful", isAuthenticated, (req, res) => {
+    res.status(200).send('Success')
+  })
+
 router.get("/seed", async (req, res) => {
     const userDetails = [
         {
@@ -120,6 +133,7 @@ router.post("/login", async (req,res) => {
             
             if (validPassword) {
               req.session.currentUser = findUserName.username
+              req.session.isAuthenticated = true
               req.session.count = 1;
               console.log(req.session)
             //   res.redirect("/")
@@ -137,21 +151,7 @@ router.post("/login", async (req,res) => {
     }
 });
 
-//Get route for login success
-router.get("/loginsuccessful", async (req,res) => {
-    const body = req.body
-    console.log(req.session)
-    console.log("body", body)
-    /* try {
-        console.log(body)
-        const createdUser = await User.create(req.body);
-        // const salt = await bcrypt.genSalt(10);
-        createdUser.password = await bcrypt.hashSync(createdUser.password, saltRounds)
-        createdUser.save().then(()=> res.status(200).send('Success'));
-    } catch (error) {
-        res.status(400).json({error: error.message});
-    }; */
-});
+
 
 // router.get("/logout", (req, res) => {
 //   req.session.destroy();
