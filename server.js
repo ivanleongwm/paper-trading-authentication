@@ -8,13 +8,14 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+const session = require("express-session");
 const MongoDBSession = require ('connect-mongodb-session')(session)
 const UserController = require("./controllers/userController")
 const PurchaseController = require ("./controllers/purchaseController")
 const SalesController = require ("./controllers/salesController")
 const StocksHistory = require("./controllers/historyController")
 const methodOverride = require("method-override");
-const session = require("express-session");
+
 
 
 const app = express();
