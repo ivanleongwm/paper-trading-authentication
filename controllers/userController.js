@@ -30,6 +30,7 @@ const router = express.Router();
 // })
 
 const isAuthenticated = (req, res, next) => {
+    console.log("isAuth Session obj:",req.session)
     if (req.session.isAuthenticated) {
        next();
     } else {
