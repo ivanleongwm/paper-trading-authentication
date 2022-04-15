@@ -28,6 +28,7 @@ mongoose.connect(mongoURI, {}, () => {
 app.use(morgan("tiny"))
 app.use(
   session({
+    cookieName: "session",
     secret: "secretpassword", //process.env.SECRET, //a random string do not copy this value or your stuff will get hacked
     resave: false, // default more info: https://www.npmjs.com/package/express-session#resave
     saveUninitialized: false, // default  more info: https://www.npmjs.com/package/express-session#resave
