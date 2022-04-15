@@ -26,7 +26,7 @@ mongoose.connect(mongoURI, {}, () => {
 })
 
 const store = new MongoDBSession({
-  uri: MONGODB_URI,
+  uri: mongoURI,
   collection: 'mySessions',
 })
 
