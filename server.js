@@ -31,7 +31,6 @@ app.use(
     secret: "secretpassword", //process.env.SECRET, //a random string do not copy this value or your stuff will get hacked
     resave: false, // default more info: https://www.npmjs.com/package/express-session#resave
     saveUninitialized: false, // default  more info: https://www.npmjs.com/package/express-session#resave
-    store: store
   })
 );
 
