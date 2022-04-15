@@ -8,6 +8,7 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+const MongoDBSession = require ('connect-mongodb-session')(session)
 const UserController = require("./controllers/userController")
 const PurchaseController = require ("./controllers/purchaseController")
 const SalesController = require ("./controllers/salesController")
@@ -24,13 +25,19 @@ mongoose.connect(mongoURI, {}, () => {
     console.log("Connected~")
 })
 
+const store = new MongoDBSession({
+  uri: MONGODB_URI,
+  collection: 'mySessions',
+})
+
 //Middleware
 app.use(morgan("tiny"))
 app.use(
   session({
     secret: "secretpassword", //process.env.SECRET, //a random string do not copy this value or your stuff will get hacked
     resave: false, // default more info: https://www.npmjs.com/package/express-session#resave
-    saveUninitialized: false, // default  more info: https://www.npmjs.com/package/express-session#resave
+    saveUninitialized: false,  // default  more info: https://www.npmjs.com/package/express-session#resave
+    store: store
   })
 );
 
