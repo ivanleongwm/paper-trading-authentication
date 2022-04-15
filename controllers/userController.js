@@ -105,8 +105,6 @@ router.post("/register", async (req,res) => {
     };
 });
 
-
-
 //Create route for login
 router.post("/login", async (req,res) => {
     console.log("body",req.body)
@@ -121,7 +119,7 @@ router.post("/login", async (req,res) => {
             // const validPassword = await bcrypt.compare("TEST", bcrypt.hashSync("TEST",bcrypt.genSaltSync(10)));
             
             if (validPassword) {
-              req.session.currentUser = findUserName
+              req.session.currentUser = findUserName.username
               req.session.count = 1;
               console.log(req.session)
             //   res.redirect("/")
@@ -137,6 +135,22 @@ router.post("/login", async (req,res) => {
     } catch (error) {
         console.log(error)
     }
+});
+
+//Get route for login success
+router.get("/loginsuccessful", async (req,res) => {
+    const body = req.body
+    console.log(req.session)
+    console.log("body", body)
+    /* try {
+        console.log(body)
+        const createdUser = await User.create(req.body);
+        // const salt = await bcrypt.genSalt(10);
+        createdUser.password = await bcrypt.hashSync(createdUser.password, saltRounds)
+        createdUser.save().then(()=> res.status(200).send('Success'));
+    } catch (error) {
+        res.status(400).json({error: error.message});
+    }; */
 });
 
 // router.get("/logout", (req, res) => {
