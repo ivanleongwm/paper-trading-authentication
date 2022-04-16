@@ -40,6 +40,7 @@ const isAuthenticated = (req, res, next) => {
 
 //? secret
 router.get("/loginsuccessful", isAuthenticated, (req, res) => {
+    console.log(req.session.currentUser)
     res.json(req.session.currentUser)
   })
 
