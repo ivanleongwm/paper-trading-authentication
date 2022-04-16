@@ -48,7 +48,12 @@ app.use(
     credentials: true,
     origin: true,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    proxy:true
+    proxy:true,
+    cookie: {
+      secure: true, // required for cookies to work on HTTPS
+      httpOnly: false,
+      sameSite: 'none'
+    }
   })
 );
 
