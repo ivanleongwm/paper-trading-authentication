@@ -40,7 +40,7 @@ const isAuthenticated = (req, res, next) => {
 
 //? secret
 router.get("/loginsuccessful", isAuthenticated, (req, res) => {
-    res.status(200).send('Success')
+    res.json(req.session.currentUser)
   })
 
 router.get("/seed", async (req, res) => {
