@@ -42,6 +42,15 @@ app.use(
   })
 );
 
+// server.js cors settings
+app.use(
+  cors({
+    credentials: true,
+    origin: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  })
+);
+
 app.use(express.urlencoded({extended:false}));
 app.use(methodOverride("_method"));
 app.use(cors());
