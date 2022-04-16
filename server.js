@@ -33,27 +33,30 @@ const store = new MongoDBSession({
 
 //Middleware
 app.use(morgan("tiny"))
+
+// server.js
+app.set("trust proxy", 1); // add this line
 app.use(
   session({
-    secret: "secretpassword", //process.env.SECRET, //a random string do not copy this value or your stuff will get hacked
-    resave: false, // default more info: https://www.npmjs.com/package/express-session#resave
-    saveUninitialized: false,  // default  more info: https://www.npmjs.com/package/express-session#resave
-    store: store
-  })
-);
-
-// server.js cors settings
-app.use(
-  cors({
-    credentials: true,
-    origin: true,
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    proxy:true,
+    secret: "secretpassword",
+    resave: false,
+    saveUninitialized: false,
+    store: store,
+// add the cookie stuff below
     cookie: {
       secure: true, // required for cookies to work on HTTPS
       httpOnly: false,
       sameSite: 'none'
-    }
+    },
+  })
+);
+
+app.use(
+  cors({
+    credentials: true,
+// change your origin to match your own
+    origin: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   })
 );
 
