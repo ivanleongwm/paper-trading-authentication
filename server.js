@@ -14,6 +14,7 @@ const UserController = require("./controllers/userController")
 const PurchaseController = require ("./controllers/purchaseController")
 const SalesController = require ("./controllers/salesController")
 const StocksHistory = require("./controllers/historyController")
+const StockHolding = require("./controllers/holdingController")
 const methodOverride = require("method-override");
 
 
@@ -65,6 +66,7 @@ app.use("/api/users", UserController);
 app.use("/api/purchase", PurchaseController);
 app.use("/api/sales", SalesController);
 app.use("/api/history", StocksHistory);
+app.use("/api/holding", StockHolding);
 
 
 app.get("/", (req, res) => {
