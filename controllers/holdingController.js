@@ -44,7 +44,6 @@ router.get("/seed", async (req, res) => {
 ];
   await StockHolding.deleteMany({});
   await StockHolding.insertMany(stockHolding);
-  // await StocksHistory.insertMany(stocksHistory);
   res.json(stockHolding);
 });
 
@@ -62,15 +61,15 @@ router.get("/", (req, res) => {
     });
 });
 
-//Post route
-router.post("/buyStocks", async (req,res) => {
-    console.log("body", req.body)
-    try {
-      const buyStocks = await StockHolding.create(req.body);
-      res.status(200).send(buyStocks);
-    } catch (error) {
-      res.status(400).json({ error: error.message });
-    };
-});
+// //Post route
+// router.post("/buyStocks", async (req,res) => {
+//     console.log("body", req.body)
+//     try {
+//       const buyStocks = await StockHolding.create(req.body);
+//       res.status(200).send(buyStocks);
+//     } catch (error) {
+//       res.status(400).json({ error: error.message });
+//     };
+// });
 
 module.exports = router;
