@@ -12,7 +12,7 @@ router.get("/seed", async (req, res) => {
   purchaseLog: [
     {
       date: "2021-02-23",
-      ticker: "APPL",
+      ticker: "AAPL",
       quantity: 3,
       purchasePrice: 50,
     },
@@ -35,7 +35,7 @@ router.get("/seed", async (req, res) => {
       },
       {
           date: "2021-02-23",
-          ticker: "APPL",
+          ticker: "AAPL",
           quantity: 10,
           purchasePrice: 50,
         },
