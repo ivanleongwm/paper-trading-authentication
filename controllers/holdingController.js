@@ -182,9 +182,16 @@ router.post("/buyStocks", async (req, res) => {
 
 //Update route
 router.put("/:username", async (req, res) => {
-    const updatedStocks = await StockHolding.findOneAndUpdate({username: req.params.username}, req.body);
+    const updatedStocks = await StockHolding.findOneAndUpdate({username: req.params.username}, 
+        { $push: { purchaseLog: req.body}});
     // res.json({ message: "Buy Updated" });
     res.json(updatedStocks)
+  });
+
+//Delete route
+router.delete("/:username", async (req, res) => {
+    await StockHolding.findOneAndDelete({username: req.params.username});
+    res.json({ message: "Holiday Deleted" });
   });
 
 module.exports = router;
