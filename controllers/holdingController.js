@@ -11,13 +11,13 @@ router.get("/seed", async (req, res) => {
       username: "Joy Kwok",
       purchaseLog: [
         {
-          date: "2021-05-27",
+          date: "2022-04-15",
           ticker: "AAPL",
           quantity: 3,
           purchasePrice: 50,
         },
         {
-          date: "2021-05-27",
+          date: "2022-04-15",
           ticker: "GOOGL",
           quantity: 5,
           purchasePrice: 200,
@@ -25,13 +25,13 @@ router.get("/seed", async (req, res) => {
       ],
       salesLog: [
         {
-          date: "2021-06-27",
+          date: "2022-04-15",
           ticker: "AAPL",
           quantity: 1,
           purchasePrice: 60,
         },
         {
-          date: "2021-06-27",
+          date: "2022-04-15",
           ticker: "GOOGL",
           quantity: 5,
           purchasePrice: 500,
@@ -39,31 +39,31 @@ router.get("/seed", async (req, res) => {
       ],
       cashBalance: [
         {
-          date: "2021-05-27",
+          date: "2022-04-15",
           cash: 8000,
         },
         {
-          date: "2021-05-28",
+          date: "2022-04-16",
           cash: 8000,
         },
         {
-          date: "2021-05-29",
+          date: "2022-04-17",
           cash: 8000,
         },
         {
-          date: "2021-05-30",
+          date: "2022-04-18",
           cash: 8000,
         },
         {
-          date: "2021-05-31",
+          date: "2022-04-19",
           cash: 8000,
         },
         {
-          date: "2021-06-01",
+          date: "2022-04-20",
           cash: 8000,
         },
         {
-          date: "2021-06-02",
+          date: "2022-04-21",
           cash: 8000,
         },
       ],
@@ -72,19 +72,23 @@ router.get("/seed", async (req, res) => {
           ticker: "AAPL",
           quantity: 3,
         },
+        {
+            ticker: "GOOGL",
+            quantity: 5,
+          },
       ],
     },
     {
       username: "Ivan Leong",
       purchaseLog: [
         {
-          date: "2021-05-27",
+          date: "2022-04-15",
           ticker: "AMZN",
           quantity: 10,
           purchasePrice: 888,
         },
         {
-          date: "2021-05-27",
+          date: "2022-04-15",
           ticker: "AAPL",
           quantity: 10,
           purchasePrice: 50,
@@ -92,13 +96,13 @@ router.get("/seed", async (req, res) => {
       ],
       salesLog: [
         {
-          date: "2021-06-27",
+          date: "2022-04-15",
           ticker: "AMZN",
           quantity: 1,
           purchasePrice: 999,
         },
         {
-          date: "2021-06-27",
+          date: "2022-04-15",
           ticker: "AAPL",
           quantity: 5,
           purchasePrice: 200,
@@ -106,35 +110,39 @@ router.get("/seed", async (req, res) => {
       ],
       cashBalance: [
         {
-          date: "2021-05-27",
+          date: "2022-04-15",
           cash: 8000,
         },
         {
-          date: "2021-05-28",
+          date: "2022-04-16",
           cash: 8000,
         },
         {
-          date: "2021-05-29",
+          date: "2022-04-17",
           cash: 8000,
         },
         {
-          date: "2021-05-30",
+          date: "2022-04-18",
           cash: 8000,
         },
         {
-          date: "2021-05-31",
+          date: "2022-04-19",
           cash: 8000,
         },
         {
-          date: "2021-06-01",
+          date: "2022-04-20",
           cash: 8000,
         },
         {
-          date: "2021-06-02",
+          date: "2022-04-21",
           cash: 8000,
         },
       ],
       stockBalance: [
+        {
+          ticker: "AMZN",
+          quantity: 10,
+        },
         {
           ticker: "AAPL",
           quantity: 10,
@@ -171,5 +179,12 @@ router.post("/buyStocks", async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
+
+//Update route
+router.put("/:username", async (req, res) => {
+    const updatedStocks = await StockHolding.findOneAndUpdate({username: req.params.username}, req.body);
+    // res.json({ message: "Buy Updated" });
+    res.json(updatedStocks)
+  });
 
 module.exports = router;
