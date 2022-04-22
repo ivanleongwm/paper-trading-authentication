@@ -73,9 +73,9 @@ router.get("/seed", async (req, res) => {
           quantity: 3,
         },
         {
-            ticker: "GOOGL",
-            quantity: 5,
-          },
+          ticker: "GOOGL",
+          quantity: 5,
+        },
       ],
     },
     {
@@ -180,18 +180,29 @@ router.post("/buyStocks", async (req, res) => {
   }
 });
 
-//Update route
-router.put("/:username", async (req, res) => {
-    const updatedStocks = await StockHolding.findOneAndUpdate({username: req.params.username}, 
-        { $push: { purchaseLog: req.body}});
-    // res.json({ message: "Buy Updated" });
-    res.json(updatedStocks)
-  });
+//Update route for purchase log
+router.put("/updatedPurchaseLog/:username", async (req, res) => {
+  const updatedPurchaseLog = await StockHolding.findOneAndUpdate(
+    { username: req.params.username },
+    { $push: { purchaseLog: req.body } }
+  );
+  // res.json({ message: "Buy Updated" });
+  res.json(updatedPurchaseLog);
+});
 
-//Delete route
-router.delete("/:username", async (req, res) => {
-    await StockHolding.findOneAndDelete({username: req.params.username});
-    res.json({ message: "Holiday Deleted" });
-  });
+//Update route for stock balance
+router.put("/updatedStockBalance/:username", async (req, res) => {
+  const updatedStockBalance = await StockHolding.findOneAndUpdate(
+    { username: req.params.username },
+  );
+  // res.json({ message: "Buy Updated" });
+  res.json(updatedStockBalance);
+});
+
+// //Delete route
+// router.delete("/:username", async (req, res) => {
+//     await StockHolding.findOneAndDelete({username: req.params.username});
+//     res.json({ message: "Holiday Deleted" });
+//   });
 
 module.exports = router;

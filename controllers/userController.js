@@ -153,6 +153,12 @@ router.post("/login", async (req,res) => {
     }
 });
 
+//Delete route
+router.delete("/:username", async (req, res) => {
+    const deletedUser = await User.findOneAndDelete({username: req.params.username});
+    res.json(deletedUser);
+  });
+
 
 
 // router.get("/logout", (req, res) => {
