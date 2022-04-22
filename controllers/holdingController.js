@@ -184,16 +184,26 @@ router.post("/buyStocks", async (req, res) => {
 router.put("/updatedPurchaseLog/:username", async (req, res) => {
   const updatedPurchaseLog = await StockHolding.findOneAndUpdate(
     { username: req.params.username },
-    { $push: { purchaseLog: req.body } }
+    { $push: { purchaseLog: req.body.purchaseLog } }
   );
   // res.json({ message: "Buy Updated" });
   res.json(updatedPurchaseLog);
 });
 
+//Update route for sale log
+router.put("/updatedSalesLog/:username", async (req, res) => {
+    const updatedSalesLog = await StockHolding.findOneAndUpdate(
+      { username: req.params.username },
+      { $push: { salesLog: req.body.salesLog } }
+    );
+    // res.json({ message: "Buy Updated" });
+    res.json(updatedSalesLog);
+  });
+
 //Update route for stock balance
 router.put("/updatedStockBalance/:username", async (req, res) => {
   const updatedStockBalance = await StockHolding.findOneAndUpdate(
-    { username: req.params.username },
+    { username: req.params.username }, req.body
   );
   // res.json({ message: "Buy Updated" });
   res.json(updatedStockBalance);
