@@ -6,6 +6,7 @@ const session = require("express-session");
 const { find, create } = require("../models/Users");
 const bcrypt = require("bcrypt");
 const User = require("../models/Users");
+const stockHoldings = require("../models/StockHolding")
 const router = express.Router();
 
 
@@ -39,9 +40,10 @@ const isAuthenticated = (req, res, next) => {
   };
 
 //? secret
-router.get("/loginsuccessful", isAuthenticated, (req, res) => {
+router.get("/loginsuccessful", isAuthenticated, async (req, res) => {
     console.log(req.session.currentUser)
-    res.json(req.session.currentUser)
+    const findUserData = await stockHoldings.findOne({"username": req.session.currentUser});//req.body.username
+    res.json(findUserData)
   })
 
 router.get("/seed", async (req, res) => {
