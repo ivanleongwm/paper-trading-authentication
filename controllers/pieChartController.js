@@ -9,23 +9,23 @@ const router = express.Router();
 router.get("/seed", async (req, res) => {
   const pieChart = [
     {
-      username: "Joy Kwok",  
+      username: "Joy Kwok",
       colour1: "#8884D8",
-      colour2: "#9CACF1",
-      colour3: "#8DD1E1",
-      colour4: "#82CA9D",
+      colour2: "#FF00FB",
+      colour3: "#F2FF00",
+      colour4: "#FFA200",
       colour5: "#A4DE6C",
       colour6: "#D0ED57",
     },
     {
-        username: "Ivan Leong",  
-        colour1: "##ADD8E6",
-        colour2: "#00FF00",
-        colour3: "#FF00FF",
-        colour4: "#FFA500",
-        colour5: "#7FFD4",
-        colour6: "#C0C0C0",
-      },
+      username: "Ivan Leong",
+      colour1: "#ADD8E6",
+      colour2: "#00FF00",
+      colour3: "#FF00FF",
+      colour4: "#FFA500",
+      colour5: "#7FFD4",
+      colour6: "#C0C0C0",
+    },
   ];
   await PieChart.deleteMany({});
   await PieChart.insertMany(pieChart);
@@ -37,20 +37,19 @@ router.get("/seed", async (req, res) => {
 // =======================================
 //Index route
 router.get("/colours/:username", async (req, res) => {
-    const findColours = await PieChart.findOne({"username": req.params.username});//req.body.username
-    res.json(findColours)
-  })
+  const findColours = await PieChart.findOne({ username: req.params.username }); //req.body.username
+  res.json(findColours);
+});
 
 //Update route for pie chart log
 router.put("/:username", async (req, res) => {
-    const pieChartColour = await PieChart.findOneAndUpdate(
-      { username: req.params.username },
-      req.body
-    );
-    // res.json({ message: "Buy Updated" });
-    res.json(pieChartColour);
-  });
-  
+  const pieChartColour = await PieChart.findOneAndUpdate(
+    { username: req.params.username },
+    req.body
+  );
+  // res.json({ message: "Buy Updated" });
+  res.json(pieChartColour);
+});
 
 module.exports = router;
 
