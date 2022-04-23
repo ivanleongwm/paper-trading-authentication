@@ -36,15 +36,10 @@ router.get("/seed", async (req, res) => {
 //              ROUTES
 // =======================================
 //Index route
-router.get("/", (req, res) => {
-  PieChart.find()
-    .then((pieChart) => {
-      res.json(pieChart);
-    })
-    .catch((err) => {
-      res.json(err);
-    });
-});
+router.get("/colours/:username", async (req, res) => {
+    const findColours = await PieChart.findOne({"username": req.params.username});//req.body.username
+    res.json(findColours)
+  })
 
 //Update route for pie chart log
 router.put("/:username", async (req, res) => {
