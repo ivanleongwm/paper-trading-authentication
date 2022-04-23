@@ -209,6 +209,16 @@ router.put("/updatedStockBalance/:username", async (req, res) => {
   res.json(updatedStockBalance);
 });
 
+//Update route for cash balance
+router.put("/updatedCashBalance/:username", async (req, res) => {
+    const updatedCashBalance = await StockHolding.findOneAndUpdate(
+      { username: req.params.username },
+      { $push: { cashBalance: req.body.cashBalance } }
+    );
+    // res.json({ message: "Buy Updated" });
+    res.json(updatedCashBalance);
+  });
+
 // //Delete route
 // router.delete("/:username", async (req, res) => {
 //     await StockHolding.findOneAndDelete({username: req.params.username});

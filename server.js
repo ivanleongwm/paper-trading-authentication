@@ -15,6 +15,7 @@ const PurchaseController = require ("./controllers/purchaseController")
 const SalesController = require ("./controllers/salesController")
 const StocksHistory = require("./controllers/historyController")
 const StockHolding = require("./controllers/holdingController")
+const PieChart = require("./controllers/pieChartController")
 const methodOverride = require("method-override");
 
 
@@ -67,6 +68,7 @@ app.use("/api/purchase", PurchaseController);
 app.use("/api/sales", SalesController);
 app.use("/api/history", StocksHistory);
 app.use("/api/holding", StockHolding);
+app.use("/api/piechart", PieChart);
 
 
 app.get("/", (req, res) => {
