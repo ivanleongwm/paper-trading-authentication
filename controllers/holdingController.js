@@ -219,10 +219,13 @@ router.put("/updatedCashBalance/:username", async (req, res) => {
     res.json(updatedCashBalance);
   });
 
-// //Delete route
-// router.delete("/:username", async (req, res) => {
-//     await StockHolding.findOneAndDelete({username: req.params.username});
-//     res.json({ message: "Holiday Deleted" });
-//   });
+//Delete route
+router.delete("/deleteUser/:username", async (req, res) => {
+    const deletedHoldings = await StockHolding.findOneAndDelete({
+      username: req.params.username,
+    });
+    res.json(deletedHoldings);
+  });
+  
 
 module.exports = router;
