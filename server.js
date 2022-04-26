@@ -41,12 +41,12 @@ app.set("trust proxy", 1); // add this line
 app.use(
   session({
     secret: "secretpassword",
-    resave: false,
+    resave: true,
     saveUninitialized: false,
     store: store,
 // add the cookie stuff below
     cookie: {
-      secure: true, // required for cookies to work on HTTPS
+      secure: false, // required for cookies to work on HTTPS
       httpOnly: false,
       sameSite: 'none'
     },

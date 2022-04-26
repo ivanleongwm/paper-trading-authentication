@@ -30,8 +30,8 @@ const router = express.Router();
 // })
 
 const isAuthenticated = (req, res, next) => {
-  console.log("isAuth Session obj:", req.session);
-  if (req.session.isAuthenticated) {
+  console.log("isAuth Session obj:", req.params.username);
+  if (req.params.username) {
     next();
   } else {
     res.status(200).send("Sorry you have no access.");
@@ -39,10 +39,11 @@ const isAuthenticated = (req, res, next) => {
 };
 
 //? secret
-router.get("/loginsuccessful", isAuthenticated, async (req, res) => {
-  console.log(req.session.currentUser);
+router.get("/loginsuccessful/:username", isAuthenticated, async (req, res) => {
+  //console.log(req.session.currentUser);
+  console.log(req.params.username)
   const findUserData = await StockHoldings.findOne({
-    username: req.session.currentUser,
+    username: req.params.username,
   }); //req.body.username
   res.json(findUserData);
 });
@@ -147,7 +148,7 @@ router.post("/login", async (req, res) => {
         req.session.count = 1;
         console.log(req.session);
         //   res.redirect("/")
-        res.status(200).json({ message: "Valid password" });
+        res.status(200).json({ message: "Valid password", session: req.session });
       } else {
         res.status(400).json({ error: "Invalid Password" });
       }
