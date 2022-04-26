@@ -120,12 +120,7 @@ router.post("/register/:username", async (req, res) => {
       {
         username: req.params.username,
         purchaseLog: [],
-        cashBalance: [
-          {
-            date: Date.now().toString(),
-            cash: 8000,
-          },
-        ],
+        cashBalance: 10000,
         stockBalance: [],
       }
     );
@@ -194,12 +189,7 @@ router.post("/newUser/:username", async (req, res) => {
       {
         username: req.params.username,
         purchaseLog: [],
-        cashBalance: [
-          {
-            date: Date.now().toString(),
-            cash: 8000,
-          },
-        ],
+        cashBalance: 10000,
         stockBalance: [],
       }
     );
@@ -214,6 +204,15 @@ router.delete("/:username", async (req, res) => {
   const deletedUser = await User.findOneAndDelete({
     username: req.params.username,
   });
+
+  const deletedColour = await PieChart.findOneAndDelete({
+    username: req.params.username,
+  });
+
+  const deletedHoldings = await StockHoldings.findOneAndDelete({
+    username: req.params.username,
+  });
+
   res.json(deletedUser);
 });
 
