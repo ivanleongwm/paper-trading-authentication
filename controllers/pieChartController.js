@@ -71,6 +71,14 @@ router.post("/newColour/:username", async (req, res) => {
     }
   });
 
+  //Delete route
+router.delete("/deleteColour/:username", async (req, res) => {
+    const deletedColour = await PieChart.findOneAndDelete({
+      username: req.params.username,
+    });
+    res.json(deletedColour);
+  });
+
 module.exports = router;
 
 // 	 {name: 'Group A', value: 400, fill: '#8884d8',},
