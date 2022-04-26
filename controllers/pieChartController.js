@@ -51,6 +51,26 @@ router.put("/:username", async (req, res) => {
   res.json(pieChartColour);
 });
 
+//Post route
+router.post("/newColour/:username", async (req, res) => {
+    try {
+      const newColours = await PieChart.create(
+        {
+            username: req.params.username,
+            colour1: "#8884D8",
+            colour2: "#FF00FB",
+            colour3: "#F2FF00",
+            colour4: "#FFA200",
+            colour5: "#A4DE6C",
+            colour6: "#D0ED57",
+          },
+      );
+      newColours.save().then(() => res.status(200).send("Success"));
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  });
+
 module.exports = router;
 
 // 	 {name: 'Group A', value: 400, fill: '#8884d8',},
