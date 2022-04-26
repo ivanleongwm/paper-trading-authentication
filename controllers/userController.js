@@ -7,6 +7,7 @@ const { find, create } = require("../models/Users");
 const bcrypt = require("bcrypt");
 const User = require("../models/Users");
 const StockHoldings = require("../models/StockHolding");
+const PieChart = require("../models/PieChart");
 const router = express.Router();
 
 // const saltRounds = 10;
@@ -134,6 +135,20 @@ router.post("/register/:username", async (req, res) => {
       }
     );
     createdStockHoldings.save()
+
+    const newColours = await PieChart.create(
+      {
+          username: req.params.username,
+          colour1: "#8884D8",
+          colour2: "#FF00FB",
+          colour3: "#F2FF00",
+          colour4: "#FFA200",
+          colour5: "#A4DE6C",
+          colour6: "#D0ED57",
+        },
+    );
+    newColours.save()
+    
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
