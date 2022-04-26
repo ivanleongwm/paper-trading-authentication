@@ -107,7 +107,7 @@ router.get("/", (req, res) => {
 
 const saltRounds = 10;
 //Create route for register
-router.post("/register", async (req, res) => {
+router.post("/register/:username", async (req, res) => {
   const body = req.body;
   console.log("body", body);
   try {
@@ -119,6 +119,21 @@ router.post("/register", async (req, res) => {
       saltRounds
     );
     createdUser.save().then(() => res.status(200).send("Success"));
+
+    const createdStockHoldings = await StockHoldings.create(
+      {
+        username: req.params.username,
+        purchaseLog: [],
+        cashBalance: [
+          {
+            date: Date.now().toString(),
+            cash: 8000,
+          },
+        ],
+        stockBalance: [],
+      }
+    );
+    createdStockHoldings.save()
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
