@@ -55,19 +55,16 @@ router.get("/seed", async (req, res) => {
       username: "Joy Kwok",
       email: "hi123@gmail.com",
       password: bcrypt.hashSync("88888", saltRounds),
-      cashBalance: 10000,
     },
     {
       username: "Ivan Leong",
       email: "hi345@gmail.com",
       password: bcrypt.hashSync("88888", saltRounds),
-      cashBalance: 10000,
     },
     {
       username: "Simon",
       email: "hi456@gmail.com",
       password: bcrypt.hashSync("88888", saltRounds),
-      cashBalance: 10000,
     },
   ];
   await User.deleteMany({});

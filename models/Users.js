@@ -6,7 +6,6 @@ const userSchema = new Schema({
     username: {type: String, required: false},
     email: {type: String, required: false},
     password: {type: String, required: false},
-    cashBalance: {type: Number, required: false},
     // cfmPassword : {type: String, required: false},
     // dob: {type: Date, default: Date.now, required: false},
     // gender: {type: String, required: false},

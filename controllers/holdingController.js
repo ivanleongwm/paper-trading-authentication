@@ -37,36 +37,7 @@ router.get("/seed", async (req, res) => {
           purchasePrice: 500,
         },
       ],
-      cashBalance: [
-        {
-          date: "2022-04-15",
-          cash: 8000,
-        },
-        {
-          date: "2022-04-16",
-          cash: 8000,
-        },
-        {
-          date: "2022-04-17",
-          cash: 8000,
-        },
-        {
-          date: "2022-04-18",
-          cash: 8000,
-        },
-        {
-          date: "2022-04-19",
-          cash: 8000,
-        },
-        {
-          date: "2022-04-20",
-          cash: 8000,
-        },
-        {
-          date: "2022-04-21",
-          cash: 8000,
-        },
-      ],
+      cashBalance: 10000,
       stockBalance: [
         {
           ticker: "AAPL",
@@ -108,36 +79,7 @@ router.get("/seed", async (req, res) => {
           purchasePrice: 200,
         },
       ],
-      cashBalance: [
-        {
-          date: "2022-04-15",
-          cash: 8000,
-        },
-        {
-          date: "2022-04-16",
-          cash: 8000,
-        },
-        {
-          date: "2022-04-17",
-          cash: 8000,
-        },
-        {
-          date: "2022-04-18",
-          cash: 8000,
-        },
-        {
-          date: "2022-04-19",
-          cash: 8000,
-        },
-        {
-          date: "2022-04-20",
-          cash: 8000,
-        },
-        {
-          date: "2022-04-21",
-          cash: 8000,
-        },
-      ],
+      cashBalance: 10000,
       stockBalance: [
         {
           ticker: "AMZN",

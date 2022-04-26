@@ -20,12 +20,7 @@ const holdingSchema = new Schema({
       purchasePrice: { type: Number, required: false },
     },
   ],
-  cashBalance: [
-    {
-      date: { type: Date, required: false },
-      cash: { type: Number, required: false },
-    },
-  ],
+  cashBalance: {type: Number, required: false},
   stockBalance: [
     {
       ticker: { type: String, required: false },
