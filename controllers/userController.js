@@ -61,11 +61,6 @@ router.get("/seed", async (req, res) => {
       email: "hi345@gmail.com",
       password: bcrypt.hashSync("88888", saltRounds),
     },
-    {
-      username: "Simon",
-      email: "hi456@gmail.com",
-      password: bcrypt.hashSync("88888", saltRounds),
-    },
   ];
   await User.deleteMany({});
   await User.insertMany(userDetails);
